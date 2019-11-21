@@ -1,0 +1,65 @@
+
+<h2><a name="tool"></a>Upload your structure</h2>
+<div style="margin-left: 20px; margin-right: 20px">
+    <form action="compute/process_structure/" enctype="multipart/form-data" method="post">
+        <div class='alert alert-info'>
+            <div class='row'>
+                <div class='col-xs-12 col-sm-6'>
+                    <label for="file">Upload a crystal structure:</label>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <input type="file" name="structurefile" size="100">
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-6'>
+                    <label for="fileformat">Select here the file format:</label>
+                </div>
+                <div class='col-sm-6'>
+                    <select name="fileformat" id="fileformatSelect">
+                        <option value="qeinp-qetools">Quantum ESPRESSO input [parser: qe-tools]</option>
+                        <option value="vasp-ase">VASP POSCAR [parser: ase]</option>
+                        <option value="xsf-ase">XCrySDen (.xsf) [parser: ase]</option>
+                        <option value="castep-ase">CASTEP (.cell) [parser: ase]</option>
+                        <option value="pdb-ase">Protein Data Bank format (.pdb) [parser: ase]</option>
+                        <option value="xyz-ase">XYZ File (.xyz) [parser: ase]</option>
+                        <option value="cif-ase">CIF File (.cif) [parser: ase]</option>
+                        <option value="cif-pymatgen">CIF File (.cif) [parser: pymatgen]</option>
+                    </select>
+                </div>
+            </div>
+            <div id="xyzFormatFields" class="row" style="display: none">
+                <div class='col-sm-6'>Cell vectors (&#x212B;)</div>
+                <div class='col-sm-6'>
+                    <div class='row'>
+                        <div class='col-xs-2'>A</div>
+                        <div class='col-xs-3'><input type="number" step="any" class="form-control" name="xyzCellVecAx"></div>
+                        <div class='col-xs-3'><input type="number" step="any" class="form-control" name="xyzCellVecAy"></div>
+                        <div class='col-xs-3'><input type="number" step="any" class="form-control" name="xyzCellVecAz"></div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-xs-2'>B</div>
+                        <div class='col-xs-3'><input type="number" step="any" class="form-control" name="xyzCellVecBx"></div>
+                        <div class='col-xs-3'><input type="number" step="any" class="form-control" name="xyzCellVecBy"></div>
+                        <div class='col-xs-3'><input type="number" step="any" class="form-control" name="xyzCellVecBz"></div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-xs-2'>C</div>
+                        <div class='col-xs-3'><input type="number" step="any" class="form-control" name="xyzCellVecCx"></div>
+                        <div class='col-xs-3'><input type="number" step="any" class="form-control" name="xyzCellVecCy"></div>
+                        <div class='col-xs-3'><input type="number" step="any" class="form-control" name="xyzCellVecCz"></div>
+                    </div>
+                </div>
+            </div>
+            {% if include_pages['upload_structure_additional_content'] is not none %}
+            {% include include_pages['upload_structure_additional_content'] %}
+            {% endif %}
+    	    {% block structure_additional_content %}{% endblock %}
+            <div class='row' style="text-align:center">
+                <p class='small'>By continuing, you agree with the <a href="../termsofuse/" target="_blank">terms of use</a> of this service.</p>
+                <input type="submit" value="Calculate my structure" class="btn btn-default">
+            </div>
+        </div>
+    </form>
+</div>
+

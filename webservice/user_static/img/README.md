@@ -1,0 +1,1 @@
+Add in this directory custom images (if any) for your application.

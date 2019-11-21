@@ -1,0 +1,142 @@
+<div>
+<form action="/compute/show_system/" method="POST">
+  <div style="margin-left: 20px; margin-right: 20px;">
+      <div class='row'>
+	<div class="col-xs-12 col-sm-6">
+		<label for="angle">Select GNR junction angle:</label>
+	</div>
+	<div class="col-xs-12 col-sm-6">
+	  <select name="angle" onChange="checkOption(this)" required >
+	    <option value='180'>180</option>
+	    <option value='120'>120</option> 
+	    <option value='60'>60</option> 
+	  </select>
+	</div>
+      </div>
+      <script type="text/javascript">
+		        function checkOption(obj) {
+				var input1 = document.getElementById("shift");
+				input1.disabled = (obj.value == "120"||obj.value == "60");
+				var input2 = document.getElementById("distance");
+				input2.disabled = obj.value == "60";
+			}
+      </script>
+      <script type="text/javascript">
+	      function checkeven(obj) {
+		      var input3 = document.getElementById("chiral");
+		      input3.disabled = (Number(obj.value)%2)==1;
+	      }
+      </script>
+      <div class='row'>
+	      <div class="col-xs-12 col-sm-6">
+		      <label for="distance">Select distance between leads:</label>
+              </div>       
+	      <div class="col-xs-12 col-sm-6">
+	          <select name="distance" id="distance">
+			  <option value='1'>1</option>
+			  <option value='2'>2</option>
+			  <option value='3'>3</option>
+
+	          </select>
+	      </div>
+      </div>
+      <div class='row'>
+	      <div class="col-xs-12 col-sm-6">
+		    <label for="width">Enter GNR width:</label>
+	      </div>
+	      <div class="col-xs-6 col-sm-4">
+		      <input type="text" name="width" value="4" size="1" onChange="checkeven(this)" required >
+	      </div>
+      </div>
+      <div class='row'>
+	            <div class="col-xs-12 col-sm-6">
+                         <label for="shift">Select shift:</label>
+                    </div>
+		    <div class="col-xs-12 col-sm-6">
+			 <select name="shift" id="shift">
+			      <option value='0'>0</option>
+			      <option value='1'>1</option>
+			      <option value='2'>2</option>
+			      <option value='3'>3</option>
+			      <option value='4'>4</option>
+			      <option value='5'>5</option>
+                         </select>
+                    </div>
+      </div>
+      <div class='row'>
+	         <div class="col-xs-12 col-sm-6">
+		      <label for="chiral">Select chirality:</label>
+		 </div>
+                 <div class="col-xs-12 col-sm-6">
+	                <select name="chiral" id=chiral>
+				            <option value='0'>0</option>
+					    <option value='1'>1</option>
+	                </select>
+		 </div>
+      </div>
+      <div class='row' style="text-align: center">
+	<input type="submit" value="Display junction" class="btn btn-default">
+      </div>
+  </div>
+</form>
+</div>
+<div>
+	<form action="/compute/remove_atoms/" method="POST">
+	<div class='row'>
+		<div class="col-xs-12 col-sm-6">
+			<label for="width">Enter the atoms to remove separated by a comma:</label>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<input type="text" name="atoms_remove" value="1,4,2" size="20">
+		</div>
+	</div>
+	<div class='row' style="text-align: center">
+		<input type="submit" value="Remove atoms" class="btn btn-default">
+	</div>
+	</form>
+</div>
+<div>
+	 <img src={{structure}} alt="Junction should be here" height="300" width="300">
+</div>
+<div>
+	<form action="/compute/conductivity_DOS/" method="POST">
+		<div class='row'>
+			<div class="col-xs-12 col-sm-6">
+				<label for="width">Enter the energy range in terms of t for calculation of conductivity and density of states:</label>
+			</div>
+			<div class="col-xs-6 col-sm-4">
+				<input type="text" name="emin" value="-3" size="1">
+				<input type="text" name="emax" value="3" size="1">
+			</div>
+		</div>
+		<div class='row' style="text-align: center">
+			<input type="submit" value="Calculate" class="btn btn-default">
+		</div>
+	</form>
+</div>
+<div>
+	         <img src={{cond}} alt="Conductivity plot should be here" height="300" width="300">
+		<img src={{DOS}} alt="DOS plot should be here" height="300" width="300">
+</div>
+<div>
+	        <form action="/compute/single_en_prop/" method="POST">
+			<div class="col-xs-12 col-sm-4">
+				<label for="width">Enter the energy for calculation of LDOS and current map:</label>
+				<input type="text" name="en" value="0" size="1">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				                                <label for="width">Enter the mode (starting with 0) :</label>
+								<input type="text" name="mode" value="0" size="1">
+			</div>
+			<div class='row' style="text-align: center">
+				<input type="submit" value="Calculate" class="btn btn-default">
+	                </div>
+                </form>
+<div>
+	<img src={{band}} alt="Band structure should be here" height="300" width="300">
+	<img src={{ldos}} alt="LDOS should be here" height="300" width="300">
+</div>
+<div>
+	<img src={{wfn}} alt="WFN should be here" height="100" width="300">
+	<img src={{current}} alt="Current should be here" height="300" width="300">
+</div>
