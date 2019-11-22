@@ -3,6 +3,13 @@ def plot_numbers(sys, lead0, lead1, a, b, v1, v2, p1, p2, A, D, W):   #Plots the
         from math import sqrt
         import matplotlib.pyplot as plt
         import numpy as np
+        import operator
+        from matplotlib import cm
+        from cmath import phase
+        import matplotlib as mpl
+        import cmocean
+        import unicodedata
+        from matplotlib import gridspec
         sites = list(sys.sites()) #get the sites from kwant builder, the coordinates are shown in terms of lattice vectors
         fig, ax = plt.subplots(figsize=(10,10)) 
         ax.set_aspect('equal','box')
@@ -45,6 +52,13 @@ def make_system(A,W,F=0,D=1,t=2.75,S=0):
     from math import sqrt
     import matplotlib.pyplot as plt
     import numpy as np
+    import operator
+    from matplotlib import cm
+    from cmath import phase
+    import matplotlib as mpl
+    import cmocean
+    import unicodedata
+    from matplotlib import gridspec
 #Check if width is even or odd and assign a variable N, that is used to construct system
     if W % 2 == 0:
         N=(W-2)/2

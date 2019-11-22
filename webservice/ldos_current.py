@@ -1,6 +1,7 @@
 def get_band(lead0):
     import numpy as np
     import kwant
+    import matplotlib.pyplot as plt
     bands = kwant.physics.Bands(lead0.finalized())
     t=2.75
     momenta = np.linspace(-np.pi, np.pi, 101)
@@ -9,7 +10,13 @@ def get_band(lead0):
         energies[j]=energies[j]/t  
     for j in range(len(momenta)):
         momenta[j]=momenta[j]/np.pi 
-    return momenta, energies
+    plt.figure(figsize=(10,10))
+    plt.plot(momenta, energies)
+    plt.xticks(np.arange(-1,1.1,1), ('X', 'Γ', 'X'))
+    plt.xlabel("Wave vector")
+    plt.ylabel("Energy (t)")
+    plt.grid(b=None, which='major', axis='both')
+    plt.savefig('webservice/user_static/img/band.png',bbox_inches='tight')
 
 def get_ldos(fsys,xaxis,yaxis,en=0.5,t=2.75):
     import kwant
