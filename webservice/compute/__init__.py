@@ -4,14 +4,12 @@ import flask
 from flask import Blueprint
 from flask import request
 import matplotlib.pyplot as plt
+import io
 from flask import Response
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import os
 import time
-directory = os.path.abspath(os.path.split(os.path.realpath(__file__))[0] + "/../")
-template_folder = os.path.join(directory, 'templates/user_templates')
-static_folder = os.path.join(directory, "static")
 import kwant
 import numpy as np
 from tapp import make_system
@@ -75,44 +73,19 @@ def calculate_conductivity():
     fsys=sys.finalized()
     global perfsys
     perfsys=perfect_system(W)
-    energies,trans,trans2=plot_conductance(fsys,perfsys,emin=emin,emax=emax)
-    plt.figure(figsize=(10,10))
-    plt.xlabel("Energy (t)")
-    plt.ylabel("Conductance (e\N{SUPERSCRIPT TWO}/h)")
-    plt.xticks(np.arange(emin, emax+(emax-emin)/10, round((emax-emin)/10,2)),rotation=90)
-    plt.grid(b=None, which='major', axis='both')
-    plt.plot(energies, trans,label='Junction')
-    plt.plot(energies, trans2,label='GNR')
-    plt.legend()
-    plt.savefig('webservice/user_static/img/cond.png',bbox_inches='tight')
-    energies,dos,dos2=get_DOS(fsys,perfsys,emin=emin,emax=emax)
-    plt.figure(figsize=(10,10))
-    plt.plot(energies, dos,label='Junction')
-    plt.plot(energies, dos2,label='GNR')
-    plt.xlabel("Energy (t)")
-    plt.ylabel("DOS")
-    plt.xticks(np.arange(emin, emax+(emax-emin)/10, round((emax-emin)/10,2)),rotation=90)
-    plt.grid(b=None, which='major', axis='both')
-    plt.legend()
-    plt.savefig('webservice/user_static/img/DOS.png',bbox_inches='tight')
+    plot_conductance(fsys,perfsys,emin=emin,emax=emax)
+    get_DOS(fsys,perfsys,emin=emin,emax=emax)
     calculate='/user_static/img/Calculate_add.png'
     return flask.render_template('user_templates/app_page.html',band=calculate ,current=calculate,ldos=calculate,wfn=calculate,structure ='/user_static/img/plot.png'+'?'+str(time.time()), DOS='/user_static/img/DOS.png'+'?'+str(time.time()) ,cond ='/user_static/img/cond.png'+'?'+str(time.time()))
 
 @blueprint.route("/compute/single_en_prop/",methods=["POST","GET"])
 def display_band():
-    momenta,energies=get_band(lead0)
-    plt.figure(figsize=(10,10))
-    plt.plot(momenta, energies)
-    plt.xticks(np.arange(-1,1.1,1), ('X', 'Γ', 'X'))
-    plt.xlabel("Wave vector")
-    plt.ylabel("Energy (t)")
-    plt.grid(b=None, which='major', axis='both')
-    plt.savefig('webservice/user_static/img/band.png',bbox_inches='tight')
+    get_band(lead0) #Saves figure of band structure
     en=float(request.form['en'])
-    get_ldos(fsys,xaxis,yaxis,en)
+    get_ldos(fsys,xaxis,yaxis,en) #Saves figure of LDOS
     mode=int(request.form['mode'])
-    lead_wfn(perfsys,en,mode)
-    get_current(fsys,xaxis,yaxis,en)
+    lead_wfn(perfsys,en,mode) #Saves figure of wave function
+    get_current(fsys,xaxis,yaxis,en) #Saves figure of current
     return flask.render_template('user_templates/app_page.html',current ='/user_static/img/current.png'+'?'+str(time.time()), wfn ='/user_static/img/wfn.png'+'?'+str(time.time()), structure ='/user_static/img/plot.png'+'?'+str(time.time()), DOS='/user_static/img/DOS.png'+'?'+str(time.time()) ,cond ='/user_static/img/cond.png'+'?'+str(time.time()), band='/user_static/img/band.png'+'?'+str(time.time()),ldos ='/user_static/img/ldos.png'+'?'+str(time.time()) )
 
 

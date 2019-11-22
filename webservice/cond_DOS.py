@@ -2,6 +2,7 @@
 def plot_conductance(fsys,perfsys,emin=-3, emax=3, t=2.75): #define what to calculate for the structures
     import numpy as np
     import kwant
+    import matplotlib.pyplot as plt
     trans=[] #empty list to store values
     trans2=[]
     energies=np.linspace((emin+0.0001)*t, (emax+0.0001)*t, num=100) #specify energy grid
@@ -13,7 +14,15 @@ def plot_conductance(fsys,perfsys,emin=-3, emax=3, t=2.75): #define what to calc
     for j in range(len(energies)):
         energies[j]=energies[j]/t #convert energies back in terms of t                        
             #Plotting comands           
-    return energies,trans,trans2
+    plt.figure(figsize=(10,10))
+    plt.xlabel("Energy (t)")
+    plt.ylabel("Conductance (e\N{SUPERSCRIPT TWO}/h)")
+    plt.xticks(np.arange(emin, emax+(emax-emin)/10, round((emax-emin)/10,2)),rotation=90)
+    plt.grid(b=None, which='major', axis='both')
+    plt.plot(energies, trans,label='Junction')
+    plt.plot(energies, trans2,label='GNR')
+    plt.legend()
+    plt.savefig('webservice/user_static/img/cond.png',bbox_inches='tight')
 
 #builds a perfect GNR system to compare with the system in interest
 def perfect_system(W,t=2.75): #setting up the system with vectors, lattice and symetries
@@ -48,6 +57,7 @@ def perfect_system(W,t=2.75): #setting up the system with vectors, lattice and s
 def get_DOS(fsys,perfsys,emin=-3, emax=3, t=2.75):
     import numpy as np
     import kwant
+    import matplotlib.pyplot as plt
     dos=[]
     dos2=[]
     energies=np.linspace((emin+0.0001)*t, (emax+0.0001)*t, num=100)
@@ -56,7 +66,15 @@ def get_DOS(fsys,perfsys,emin=-3, emax=3, t=2.75):
         dos2.append(np.sum(kwant.ldos(perfsys,J)))
     for j in range(len(energies)):
         energies[j]=energies[j]/t        
-    return energies,dos,dos2
+    plt.figure(figsize=(10,10))
+    plt.plot(energies, dos,label='Junction')
+    plt.plot(energies, dos2,label='GNR')
+    plt.xlabel("Energy (t)")
+    plt.ylabel("DOS")
+    plt.xticks(np.arange(emin, emax+(emax-emin)/10, round((emax-emin)/10,2)),rotation=90)
+    plt.grid(b=None, which='major', axis='both')
+    plt.legend()
+    plt.savefig('webservice/user_static/img/DOS.png',bbox_inches='tight')
         
 
 
