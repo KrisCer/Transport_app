@@ -1,1 +1,0 @@
-Add in this directory the custom JavaScript files for your application.
