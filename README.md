@@ -6,7 +6,7 @@
 
 Current version: 1.0.1
 
-## Licence
+## License
 MIT. The terms of the license can be found in the LICENSE file.
 
 ## Contact
