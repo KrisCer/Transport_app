@@ -1,6 +1,6 @@
 # TBETA (Tight-Binding Electronic Transport Application) for graphene nanoribbon junctions
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/KrisCer/Transport_app/master?urlpath=voila%2Frender%2FWeb_app_title_page.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/KrisCer/Transport_app/v1.0.2?urlpath=voila/render/Tight-Binding%20Electronic%20Transport%20Application.ipynb)
 
 <b>TBETA</b> gives you a simple graphical interface that lets you design a two-terminal Graphene nanoribbon (GNR) junction with a 60°, 120° or 180°, angle between the leads. Afterwards calculate its transport and electronic properties based on nearest-neighbour tight-binding model. Conductance is expressed within Landauer formalism and calculated using Green's function methods.
 
