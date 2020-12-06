@@ -1,1 +1,1 @@
-get install xclip
+xclip
