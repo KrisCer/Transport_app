@@ -5,3 +5,4 @@ ipywidgets==7.5.1
 kwant
 voila-materialscloud-template
 pyperclip==1.8.1
+xerox
