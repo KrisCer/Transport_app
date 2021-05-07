@@ -4,7 +4,7 @@
 
 <b>TBETA</b> gives you a simple graphical interface that lets you design a two-terminal Graphene nanoribbon (GNR) junction with a 60°, 120° or 180°, angle between the leads. Afterwards calculate its transport and electronic properties based on nearest-neighbour tight-binding model. Conductance is expressed within Landauer formalism and calculated using Green's function methods.
 
-Current version: 1.0.2
+Current version: 1.1.0
 
 ## Usage
 To design the junction structure:<br>
@@ -17,6 +17,8 @@ The electronic structure and transport properties are calculated:<br>
 
 ## License
 MIT. The terms of the license can be found in the LICENSE file.
+
+
 
 ## Contact
 kristians.cernevics@epfl.ch
