@@ -3,4 +3,4 @@ cmocean==2.0
 voila
 ipywidgets==7.5.1
 kwant
-voila-materialscloud-template
+voila-materialscloud-template==0.3.4
